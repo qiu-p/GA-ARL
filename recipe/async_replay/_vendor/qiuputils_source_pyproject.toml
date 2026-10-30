@@ -1,0 +1,25 @@
+[build-system]
+requires = [
+    "setuptools>=64",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qiuputils"
+version = "0.1"
+description = "Songhan Yang's utility tools"
+authors = [{name = "Songhan Yang", email = "qiu_p@mail.ustc.edu.cn"}]
+dependencies = [
+    "PyYAML"
+]
+
+[tool.ruff.lint]
+isort = {known-first-party = ["qiuputils"]}
+
+[tool.setuptools.package-dir]
+"" = "."
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["qiuputils"]

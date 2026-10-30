@@ -1,0 +1,33 @@
+hydra:
+  searchpath:
+    - file://${oc.env:GA_ARL_REPO_ROOT}/verl/trainer/config
+
+defaults:
+  - sft_trainer
+  - _self_
+
+model:
+  strategy: fsdp
+  trust_remote_code: true
+  attn_implementation: null
+  enable_gradient_checkpointing: true
+  lora_rank: 32
+  lora_alpha: 16
+  target_modules: all-linear
+  fsdp_config:
+    model_dtype: bf16
+    cpu_offload: false
+    offload_params: false
+    use_torch_compile: false
+
+trainer:
+  device: cuda
+  logger: ["console", "tensorboard"]
+  resume_mode: disable
+  max_ckpt_to_keep: 5
+  remove_previous_ckpt_in_save: false
+  save_merged_lora_model: true
+  merged_lora_model_dirname: merged_hf_model
+
+ulysses_sequence_parallel_size: 1
+use_remove_padding: true
